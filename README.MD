@@ -45,6 +45,11 @@ You can vote for yes or no, if all the voters voted for no, the donators will re
 
 
 # ReentrancyGuard:
-I have installed the reentrancy guard to prevent the reentrancy attack on the functions that required the protection. 
-The idea is to lock the contract while any function of the contract is being executed, so only a single function in the contract can be executed at a time.
+I have installed the reentrancy guard to prevent the reentrancy attack on the functions that required the protection. With ReentrancyGuard you need to call it's constructor and add the function "nonReentrant()" to your methods/functions you are creating. 
+e.g.:
+```
+"methodName(params) nonReentrant() public {}" 
+```
+
+The idea to protect from the reentrancy is to lock the contract while any function of the contract is being executed, so only a single function in the contract can be executed at a time.
 
