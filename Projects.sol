@@ -1,8 +1,10 @@
 pragma solidity ^0.8.4;
+import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
 import "./Charity.sol";
 
 contract Project{
+  constructor() ReentrancyGuard() public {}
     
     address owner;
     address donatorContractAddress;
@@ -76,7 +78,7 @@ contract Project{
         
     }
     
-    function refund() internal{
+    function refund() nonReentrant() internal{
         canVote=false;
         for(uint i = 0; i<indx; i++){
             uint amount = donorList[indexedAddr[i]].amount/2;
