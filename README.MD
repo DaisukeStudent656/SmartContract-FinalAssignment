@@ -43,3 +43,8 @@ You don't require to deploy the smart contract token since when you make a donat
 
 You can vote for yes or no, if all the voters voted for no, the donators will receive a refund from the contract and the rest will return to the charity. When the project owners deployed the contract they will have to wait for an entire month before they can  extract the ether from the contract. In the charity contract there's a function that you can send ether directly to the project.
 
+
+# ReentrancyGuard:
+I have installed the reentrancy guard to prevent the reentrancy attack on the functions that required the protection. 
+The idea is to lock the contract while any function of the contract is being executed, so only a single function in the contract can be executed at a time.
+
