@@ -1,8 +1,11 @@
 pragma solidity ^0.8.4;
 
 import "./Dontoken.sol";
+import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
 contract Charity {
+constructor() ReentrancyGuard() public {}
+
     address charOwn;
     Dontoken public myToken = new Dontoken(msg.sender,0);
     
@@ -11,14 +14,14 @@ contract Charity {
     }
     
     
-  function donate() public payable {
+  function donate() nonReentrant() public payable {
         require(msg.value > 10, "minimum value is 10 wei");
         uint value = msg.value;
         uint newAmount = (value /100*20);
         myToken.mint(msg.sender, newAmount);
     } 
     
-    function Withdrawal(address payable account)  payable external {
+    function Withdrawal(address payable account) nonReentrant() payable external {
         require(msg.sender == charOwn,"Only the charity owner address can withdraw from the charity.");
         account.transfer(address(this).balance);
     }
@@ -41,7 +44,7 @@ contract Charity {
         payable(projectAddress).transfer(amount);
     }
 
-    function transferTokens(address sender, address recipient, uint amount) external {
+    function transferTokens(address sender, address recipient, uint amount)  external {
         myToken.pay(sender,recipient, amount);
     }
 
